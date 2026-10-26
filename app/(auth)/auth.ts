@@ -36,6 +36,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  session: { strategy: "jwt" },
   ...authConfig,
   callbacks: {
     jwt({ token, user }) {

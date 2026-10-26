@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { guestRegex, isDevelopmentEnvironment } from "./lib/constants";
+import { guestRegex } from "./lib/constants";
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -13,10 +13,14 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const isHttps = request.nextUrl.protocol === "https:";
   const token = await getToken({
+    cookieName: isHttps
+      ? "__Secure-authjs.session-token"
+      : "authjs.session-token",
     req: request,
     secret: process.env.AUTH_SECRET,
-    secureCookie: !isDevelopmentEnvironment,
+    secureCookie: isHttps,
   });
 
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";

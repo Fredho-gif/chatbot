@@ -90,11 +90,14 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               <div className="group/logo relative flex items-center justify-center">
                 <SidebarMenuButton
                   asChild
-                  className="size-8 !px-0 items-center justify-center group-data-[collapsible=icon]:group-hover/logo:opacity-0"
-                  tooltip="Chatbot"
+                  className="h-8 min-w-0 items-center gap-2 !px-0 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:group-hover/logo:opacity-0"
+                  tooltip="Emma"
                 >
                   <Link href="/" onClick={closeMobile}>
-                    <MessageSquareIcon className="size-4 text-sidebar-foreground/50" />
+                    <MessageSquareIcon className="size-4 shrink-0 text-sidebar-foreground/50" />
+                    <span className="truncate font-medium text-[13px] text-sidebar-foreground group-data-[collapsible=icon]:hidden">
+                      Emma
+                    </span>
                   </Link>
                 </SidebarMenuButton>
                 <Tooltip>
